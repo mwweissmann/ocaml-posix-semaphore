@@ -1,0 +1,38 @@
+# OASIS_START
+# DO NOT EDIT (digest: 8c4d4e3b7d27f14fe17dca850e635e39)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library posix-semaphore
+"src/posix-semaphore.cmxs": use_posix-semaphore
+<src/*.ml{,i,y}>: oasis_library_posix_semaphore_ccopt
+"src/semaphore.c": oasis_library_posix_semaphore_ccopt
+<src/posix-semaphore.{cma,cmxa}>: oasis_library_posix_semaphore_cclib
+"src/libposix-semaphore_stubs.lib": oasis_library_posix_semaphore_cclib
+"src/dllposix-semaphore_stubs.dll": oasis_library_posix_semaphore_cclib
+"src/libposix-semaphore_stubs.a": oasis_library_posix_semaphore_cclib
+"src/dllposix-semaphore_stubs.so": oasis_library_posix_semaphore_cclib
+<src/posix-semaphore.{cma,cmxa}>: use_libposix-semaphore_stubs
+<src/*.ml{,i,y}>: pkg_result
+<src/*.ml{,i,y}>: pkg_unix
+"src/semaphore.c": pkg_result
+"src/semaphore.c": pkg_unix
+# Executable test
+<test/test.{native,byte}>: pkg_result
+<test/test.{native,byte}>: pkg_unix
+<test/test.{native,byte}>: use_posix-semaphore
+<test/*.ml{,i,y}>: pkg_result
+<test/*.ml{,i,y}>: pkg_unix
+<test/*.ml{,i,y}>: use_posix-semaphore
+# OASIS_STOP

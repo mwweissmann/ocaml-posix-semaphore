@@ -1,0 +1,38 @@
+OASISFormat: 0.4
+Name:        posix-semaphore
+Version:     0.3.0
+Synopsis:    POSIX semaphore functions
+Authors:     Markus W. Weissmann <markus.weissmann@in.tum.de>
+Maintainers: Markus W. Weissmann <markus.weissmann@in.tum.de>
+Homepage:    https://github.com/mwweissmann/ocaml-posix-semaphore/
+License:     MIT
+Plugins:     META (0.4)
+
+Library "posix-semaphore"
+  Path:                 src/
+  BuildTools:           ocamlbuild
+  Modules:              Posix_semaphore
+  CSources:             semaphore.c
+  CCLib:                -lpthread
+  CCOpt:                -O2 -Wall -Wextra -Wno-unused-parameter
+  BuildDepends:         result, unix
+
+Document "api"
+  Title:                API reference for POSIX semaphore
+  Type:                 ocamlbuild (0.4)
+  Install:              false
+  BuildTools:           ocamlbuild, ocamldoc
+  Format:               HTML
+  Index:                index.html
+  XOCamlbuildPath:      src/
+  XOCamlbuildLibraries: posix-semaphore
+
+Executable "test"
+  Path:                 test/
+  MainIs:               test.ml
+  BuildDepends:         posix-semaphore
+  CompiledObject:       best
+  BuildTools:           ocamlbuild
+  Install:              false
+  Build:                true
+

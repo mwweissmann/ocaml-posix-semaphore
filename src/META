@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 002f30d9b8c64e3bd5ba3f2388d45b55)
+version = "0.3.0"
+description = "POSIX semaphore functions"
+requires = "result unix"
+archive(byte) = "posix-semaphore.cma"
+archive(byte, plugin) = "posix-semaphore.cma"
+archive(native) = "posix-semaphore.cmxa"
+archive(native, plugin) = "posix-semaphore.cmxs"
+exists_if = "posix-semaphore.cma"
+# OASIS_STOP
+
