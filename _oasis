@@ -12,7 +12,7 @@ Library "posix-semaphore"
   Path:                 src/
   BuildTools:           ocamlbuild
   Modules:              Posix_semaphore
-  CSources:             semaphore.c
+  CSources:             semaphore.c, ocaml-posix-semaphore.h
   CCLib:                -lrt -lpthread
   CCOpt:                -O2 -Wall -Wextra -Wno-unused-parameter
   BuildDepends:         result, unix, posix-time

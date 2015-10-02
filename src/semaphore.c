@@ -17,6 +17,8 @@
 #include <caml/unixsupport.h>
 #include <caml/custom.h>
 
+#include "ocaml-posix-semaphore.h"
+
 void finalize_ptr_free(value v) {
   sem_t *s;
   s = (sem_t *) Data_custom_val(v);
@@ -31,8 +33,6 @@ static struct custom_operations semaphore_custom_ops = {
   .serialize   = custom_serialize_default,
   .deserialize = custom_deserialize_default
 };
-
-#define Sem_val(v) ((sem_t **) Data_custom_val(v))
 
 CAMLprim value caml_copy_semaphore(sem_t *s) {
   CAMLparam0();

@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 110177a44021668f955eff9629b0aa24) *)
+(* DO NOT EDIT (digest: bc30ed5f7ae86c8dae42eb4095c26bb2) *)
 module OASISGettext = struct
 (* # 22 "src/oasis/OASISGettext.ml" *)
 
@@ -608,7 +608,7 @@ open Ocamlbuild_plugin;;
 let package_default =
   {
      MyOCamlbuildBase.lib_ocaml = [("posix-semaphore", ["src"], [])];
-     lib_c = [("posix-semaphore", "src/", [])];
+     lib_c = [("posix-semaphore", "src/", ["src/ocaml-posix-semaphore.h"])];
      flags =
        [
           (["oasis_library_posix_semaphore_ccopt"; "compile"],
