@@ -13,9 +13,9 @@ Library "posix-semaphore"
   BuildTools:           ocamlbuild
   Modules:              Posix_semaphore
   CSources:             semaphore.c
-  CCLib:                -lpthread
+  CCLib:                -lrt -lpthread
   CCOpt:                -O2 -Wall -Wextra -Wno-unused-parameter
-  BuildDepends:         result, unix
+  BuildDepends:         result, unix, posix-time
 
 Document "api"
   Title:                API reference for POSIX semaphore

@@ -25,17 +25,17 @@ THE SOFTWARE.
   @author Markus W. Weissmann
 *)
 
-type semaphore
+(** A semaphore *)
+type 'a semaphore
 
-val sem_wait : semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
-val sem_post : semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
-val sem_init : int -> (semaphore, [>`EUnix of Unix.error]) Result.result
-val sem_getvalue : semaphore -> (int, [>`EUnix of Unix.error]) Result.result
-val sem_destroy : semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
-(*
+val sem_wait : 'a semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
+val sem_post : 'a semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
+val sem_init : int -> ([> `Unnamed] semaphore, [>`EUnix of Unix.error]) Result.result
+val sem_getvalue : 'a semaphore -> (int, [>`EUnix of Unix.error]) Result.result
+val sem_destroy : [> `Unnamed] semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
+val sem_close : [> `Named] semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
+val sem_trywait : 'a semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
+val sem_timedwait : 'a semaphore -> Posix_time.Timespec.t -> (unit, [>`EUnix of Unix.error]) Result.result
 val sem_unlink : string -> (unit, [>`EUnix of Unix.error]) Result.result
-val sem_open : string -> Unix.open_flag list -> Unix.file_perm -> int -> (t, [>`EUnix of Unix.error]) Result.result
-val sem_close : semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
-val sem_trywait : semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
-val sem_timedwait : semaphore -> Posix_time.Timespec.t -> (unit, [>`EUnix of Unix.error]) Result.result
-*)
+val sem_open : string -> Unix.open_flag list -> Unix.file_perm -> int -> ([> `Named] semaphore, [>`EUnix of Unix.error]) Result.result
+
