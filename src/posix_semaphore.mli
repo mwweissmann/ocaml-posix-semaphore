@@ -25,8 +25,10 @@ THE SOFTWARE.
   @author Markus W. Weissmann
 *)
 
-(** A semaphore *)
 type 'a semaphore
+(** A semaphore. The type ['a] is only a phantom type specifying if the
+  semaphore is a named or unnamed one. This avoids the possible error
+  of closing/destroying a semaphore with the wrong function. *)
 
 val sem_wait : 'a semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
 (** [sem_wait s] decrements (locks) the semaphore [s].
