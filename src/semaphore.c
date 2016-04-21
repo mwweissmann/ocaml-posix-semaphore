@@ -16,6 +16,7 @@
 #include <caml/fail.h>
 #include <caml/unixsupport.h>
 #include <caml/custom.h>
+#include <posix-time/posix-time.h>
 
 #include "ocaml-posix-semaphore.h"
 
@@ -165,8 +166,7 @@ CAMLprim value stub_sem_timedwait(value sem, value time) {
   sem_t *s;
   struct timespec t;
 
-  t.tv_sec = Int64_val(Field(time, 0));
-  t.tv_nsec = Int64_val(Field(time, 1));
+  t = timespec_val(time);
   s = *Sem_val(sem);
   if (NULL == s) {
     lerrno = EINVAL;
