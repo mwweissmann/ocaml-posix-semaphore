@@ -1,6 +1,6 @@
 OASISFormat: 0.4
 Name:        posix-semaphore
-Version:     0.3.0
+Version:     0.4.0
 Synopsis:    POSIX semaphore functions
 Authors:     Markus W. Weissmann <markus.weissmann@in.tum.de>
 Maintainers: Markus W. Weissmann <markus.weissmann@in.tum.de>
@@ -14,7 +14,7 @@ Library "posix-semaphore"
   Modules:              Posix_semaphore
   CSources:             semaphore.c, ocaml-posix-semaphore.h
   CCLib:                -lrt -lpthread
-  CCOpt:                -O2 -Wall -Wextra -Wno-unused-parameter
+  CCOpt:                -O2 -Wall -Wextra -Wno-unused-parameter -I $libdir
   BuildDepends:         result, unix, posix-time
 
 Document "api"
