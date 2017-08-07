@@ -37,25 +37,53 @@ val sem_wait : 'a semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
   is becomes possible due to a concurrent [sem_post] or a signal handler
   interrupts the call. *)
 
+val sem_wait_exn : 'a semaphore -> unit
+(** [sem_wait_exn s] is identical to [sem_wait s] but raises a [Unix_error] on
+  error. *)
+
 val sem_post : 'a semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
 (** [sem_post s] increments (unlocks) the semaphore [s]. *)
+
+val sem_post_exn : 'a semaphore -> unit
+(** [sem_post_exn s] is identical to [sem_post s] but raises a [Unix_error] on
+  error. *)
 
 val sem_init : int -> ([> `Unnamed] semaphore, [>`EUnix of Unix.error]) Result.result
 (** [sem_init n] creates and initializes a new unnamed semaphore.
   The initial value of the semaphore is [n]. *)
 
+val sem_init_exn : int -> [> `Unnamed] semaphore
+(** [sem_init_exn n] is identical to [sem_init n] but raises [Unix_error] on
+  error. *)
+
 val sem_getvalue : 'a semaphore -> (int, [>`EUnix of Unix.error]) Result.result
 (** [sem_getvalue s] returns the current value of the semaphore [s]. *)
+
+val sem_getvalue_exn : 'a semaphore -> int
+(** [sem_getvalue_exn s] is identical to [sem_getvalue s] but raises a
+  [Unix_error] on error. *)
 
 val sem_destroy : [> `Unnamed] semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
 (** [sem_destroy s] destroys the unnamed semaphore [s]. *)
 
+val sem_destroy_exn : [> `Unnamed] semaphore -> unit
+(** [sem_destroy_exn s] is identical to [sem_destroy s] but raises a
+  [Unix_error] on error. *)
+
 val sem_close : [> `Named] semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
 (** [sem_close s] closes the named semaphore [s]. *)
+
+val sem_close_exn : [> `Named] semaphore -> unit
+(** [sem_close_exn s] is identical to [sem_close s] but raises a [Unix_error]
+  on error. *)
 
 val sem_trywait : 'a semaphore -> (unit, [>`EUnix of Unix.error]) Result.result
 (** [sem_trywait s] is the same as [sem_wait s], except that if the decrement
   cannot be performed immediately, [sem_trywait] returns an error instead of blocking. *)
+
+val sem_trywait_exn : 'a semaphore -> unit
+(** [sem_trywait_exn s] is identical to [sem_trywait s] but raises a
+  [Unix_error] on error. *)
 
 val sem_timedwait : 'a semaphore -> Posix_time.Timespec.t -> (unit, [>`EUnix of Unix.error]) Result.result
 (** [sem_timedwait s t] is the same as [sem_wait s] except that [t] specifies
@@ -64,11 +92,23 @@ val sem_timedwait : 'a semaphore -> Posix_time.Timespec.t -> (unit, [>`EUnix of 
   the call, and the semaphore [s] could not be locked immediately, [sem_timedwait s t]
   fails with a timeout error. *)
 
+val sem_timedwait_exn : 'a semaphore -> Posix_time.Timespec.t -> unit
+(** [sem_timedwait_exn s t] is identical to [sem_timedwait s t] but raises a
+  [Unix_error] on error. *)
+
 val sem_unlink : string -> (unit, [>`EUnix of Unix.error]) Result.result
 (** [sem_unlink path] removes the named semaphore referenced by [path].
   The semaphore is removed immediately but only destroyed once all other processes
   that have the semaphore open close it. *)
 
+val sem_unlink_exn : string -> unit
+(** [sem_unlink_exn path] is identical to [sem_unlink path] but raises a
+  [Unix_error] on error. *)
+
 val sem_open : string -> Unix.open_flag list -> Unix.file_perm -> int -> ([> `Named] semaphore, [>`EUnix of Unix.error]) Result.result
 (** [sem_open path flags perms n] creates a new named semaphore with initial value [n]. *)
+
+val sem_open_exn : string -> Unix.open_flag list -> Unix.file_perm -> int -> [> `Named] semaphore
+(** [sem_open_exn path flags perms n] is identical to
+  [sem_open path flags perms n] but raises a [Unix_error] on error. *)
 
